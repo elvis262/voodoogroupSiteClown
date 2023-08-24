@@ -42,7 +42,7 @@ function AnimationContainer() {
         {
             enter 
             &&
-            <div className="text-center relative -translate-y-1/2 pointer-events-none text-[#ffffffb6]">
+            <div className="text-center relative -translate-y-full pointer-events-none text-[#ffffffb6] border border-solid border-red-500">
                 
                 {
                     messages.map((message, index)=>{

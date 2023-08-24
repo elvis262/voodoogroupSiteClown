@@ -17,6 +17,7 @@
     "eslint-config-next": "13.4.19",
     "file-loader": "^6.2.0",
     "framer-motion": "^10.16.1",
+    "howler": "^2.2.3",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "react": "18.2.0",
