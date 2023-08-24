@@ -6,7 +6,7 @@ import AnimationContainer from "../components/AnimationContainer"
 export default function Home() {
   return (
     <div className="h-screen w-full relative">
-      <video autoPlay loop muted playsInline className='relative w-full h-full object-cover'>
+      <video autoPlay loop muted playsInline className='relative w-full h-full object-cover' preload="auto | metadata | none">
           <source src={"/asset/Fume.mp4"} type='video/mp4'/>
       </video>
 
