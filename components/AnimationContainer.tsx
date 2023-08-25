@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
-import { useCallback, useState } from "react"
-import FadeParagraph from "./FadeParagraph"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { cn } from "@/lib/cn"
 import ParagraphShower from "./ParagraphShower"
 
 
@@ -17,19 +17,36 @@ const messages: Array<string> = [
 "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque iste vitae impedit, possimus, magnam repellendus consequuntur architecto error odio non, est placeat? Autem aliquid quibusdam officiis laudantium consequuntur."
 ]
 
+
+
 function AnimationContainer() {
 
     const [enter, setEnter] = useState<boolean>(false)
+    const ref = useRef<HTMLDivElement>(null)
+    const [size, setSize] = useState<number>(0)
+    let conditionnalClass = useMemo<string>(() => `md:-ml-[${size / 2}px]`, [size])
+    useEffect(()=>{
+        if(ref.current){
+            setSize(ref.current.clientHeight)
+        }
+
+    }, [])
 
 
+    const handleResize = useCallback(()=>{
+        if(ref.current){
+            setSize(ref.current.clientHeight)
+        }
+    },[ref])
+    console.log(conditionnalClass)
   return (
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] h-2/5 md:w-[35%] md:h-4/5 md:top-2 lg:translate-y-0">
+        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] h-2/5 md:w-[35%] md:h-4/5 md:top-2 md:translate-y-0 text-center" ref={ref}>
         <Image 
         src={"/asset/Poupe-Vaticom.png"}
         width = {840}
         height = {993}  
         alt ="Le Pape"
-        className = "relative w-full h-[100%] object-contain initialPoupe"
+        className ={cn("relative w-full h-[100%] object-contain initialPoupe transition-all duration-1000", { "md:-ml-[270px]" : enter})}
         />
         { 
             !enter &&  <>

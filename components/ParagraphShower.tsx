@@ -14,7 +14,7 @@ const ParagraphShower : FunctionComponent<Props> = ({messages}) => {
     const handleHidden = useCallback(() => {
         setIndex(i => i + 1)
       }, []) 
-  return (<div className="text-center absolute bottom-12 left-1/2 -translate-x-1/2 w-full -translate-y-full pointer-events-none text-[#ffffffb6]">
+  return (<div className="text-center absolute bottom-12 left-1/2 -translate-x-1/2 w-full -translate-y-full pointer-events-none text-[#ffffffb6] md:left-full md:bottom-1/2 md:translate-y-1/2">
                 
             {
                 messages.slice(index, index+1).map((message: string)=> <FadeParagraph onHidden={handleHidden} message={message} last={index === (messages.length - 1)} key={index}/>

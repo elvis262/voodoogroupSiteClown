@@ -12,9 +12,14 @@
   --background-start-rgb: 255;
 }
 
+.debug{
+  @apply border border-solid border-red-500
+}
+
 body{
   @apply font-patriot text-white;
 }
+
 
 .initialPoupe{
   opacity: 0;

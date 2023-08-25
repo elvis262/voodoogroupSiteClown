@@ -10,7 +10,7 @@ export default function Home() {
           <source src={"/asset/Fume.mp4"} type='video/mp4'/>
       </video>
 
-      <div className="absolute top-[10%] md:top-2 px-8 flex justify-between align-middle items-center w-full md:w-2/3 lg:left-1/2 md:-translate-x-1/2">
+      <div className="absolute top-[10%] md:top-2 px-8 flex justify-between align-middle items-center w-full md:w-2/3 md:left-1/2 md:-translate-x-1/2">
         <Link href="/">
             <Image 
             src={"/asset/Logo-voodoo-Group.png"}
