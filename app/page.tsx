@@ -41,7 +41,7 @@ export default function Home() {
       <AnimationContainer enter={enter} setEnter={handleEnter}/>
 
       {
-        enter && <Zap/>
+        enter && <Zap setEnter={handleEnter}/>
       }
 
       <AudioControls/>
