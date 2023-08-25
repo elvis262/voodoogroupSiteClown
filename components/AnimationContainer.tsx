@@ -1,7 +1,8 @@
 'use client'
 import Image from "next/image"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import FadeParagraph from "./FadeParagraph"
+import ParagraphShower from "./ParagraphShower"
 
 
 
@@ -42,16 +43,7 @@ function AnimationContainer() {
         {
             enter 
             &&
-            <div className="text-center relative -translate-y-full pointer-events-none text-[#ffffffb6] border border-solid border-red-500">
-                
-                {
-                    messages.map((message, index)=>{
-                        return <FadeParagraph index={index} key={index}>
-                            {message}
-                        </FadeParagraph>
-                    })
-                }
-            </div>
+            <ParagraphShower messages={messages}/>
         }
 
         

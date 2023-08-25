@@ -1,49 +1,60 @@
 'use client'
 import { motion as m, AnimatePresence} from 'framer-motion'
-import {useLayoutEffect, PropsWithChildren, FunctionComponent, useRef, useState} from 'react'
+import {useEffect, PropsWithChildren, FunctionComponent, useRef, useState} from 'react'
 
 
 const variants = {
-    visible: (i: number)=> ({
+    visible: {
       opacity: 1,
       transition: {
-        delay: (i === 0? 0 : (removeDelay( i - 1) / 1000) + i * 1.2) ,
-        duration: 0.6,
+        delay: .8,
+        duration: 2.5,
         ease: 'easeInOut'
       },
-    }),
+    },
     hidden: {
         opacity: 0,
         transition: {
-            duration: 0.6,
+            duration: 2.5,
             ease: 'easeInOut'        
         }
     },
 }
 
 type Props = PropsWithChildren<{
-    index : number
+    message: string,
+    last ?: boolean,
+    onHidden () : void
 }> 
 
-const removeDelay : (index: number) => number = (index : number) => (index *  1.2) * 1000 + 4000
 
-
-const FadeParagraph: FunctionComponent<Props> = ({index, children}) => {
+const FadeParagraph: FunctionComponent<Props> = ({message, onHidden , last = false}) => {
 
     const ref = useRef<HTMLParagraphElement>(null)
     const [visible,setVisible ]= useState(true)
-    const delay : number = removeDelay(index) + ( index !== 0 ?  removeDelay(index - 1 ) : 0)
- 
+    let timer: any = null
+    let timer2: any = null
     
-    useLayoutEffect(()=>{
-        const timer: NodeJS.Timeout =  setTimeout(()=>{
+    useEffect(()=>{
+       
+     if(!last){
+        timer =  setTimeout(()=>{
             if(ref){
                 setVisible(false)
             }
-        }, delay)
+        }, 6000)
+
+        timer2 = setTimeout(()=>{
+            onHidden()
+        }, 8500)
+    }
+        
 
         return ()=>{
-            clearInterval(timer)
+            if(!last){
+                clearTimeout(timer)
+                clearTimeout(timer2)
+            }
         }
 
     },[])
@@ -53,17 +64,16 @@ const FadeParagraph: FunctionComponent<Props> = ({index, children}) => {
         {
             visible &&
             <m.p
-            custom={index}
             initial={{ opacity: 0 }}
             animate="visible"
             exit="hidden"
 
             variants={variants}
 
-            className='absolute top-0 border border-solid border-red-500'
+            className='absolute top-0 text-[#ffffff8e]'
             ref={ref}
             >
-                {children}
+                {message}
             </m.p>
         }
     </AnimatePresence>
