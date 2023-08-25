@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/cn"
 import ParagraphShower from "./ParagraphShower"
+import { type } from "os"
 
 
 
@@ -17,11 +18,12 @@ const messages: Array<string> = [
 "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque iste vitae impedit, possimus, magnam repellendus consequuntur architecto error odio non, est placeat? Autem aliquid quibusdam officiis laudantium consequuntur."
 ]
 
+type Props = {
+    enter: boolean,
+    setEnter (params: boolean) : any
+}
 
-
-function AnimationContainer() {
-
-    const [enter, setEnter] = useState<boolean>(false)
+function AnimationContainer({enter, setEnter}: Props) {
     const ref = useRef<HTMLDivElement>(null)
     const [size, setSize] = useState<number>(0)
     let conditionnalClass = useMemo<string>(() => `md:-ml-[${size / 2}px]`, [size])

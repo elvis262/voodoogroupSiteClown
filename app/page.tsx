@@ -1,9 +1,18 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import AudioControls from "../components/AudioControls"
 import AnimationContainer from "../components/AnimationContainer"
+import { useCallback, useState } from "react"
+import Zap from "@/components/Zap"
 
 export default function Home() {
+
+  const [enter, setEnter] = useState<boolean>(false)
+
+  const handleEnter = useCallback((value: boolean) =>{
+    setEnter(value)
+  }, [])
   return (
     <div className="h-screen w-full relative">
       <video autoPlay loop muted playsInline className='relative w-full h-full object-cover' preload="auto | metadata | none">
@@ -29,9 +38,11 @@ export default function Home() {
       </div>
 
 
-      <AnimationContainer/>
+      <AnimationContainer enter={enter} setEnter={handleEnter}/>
 
-      
+      {
+        enter && <Zap/>
+      }
 
       <AudioControls/>
  
