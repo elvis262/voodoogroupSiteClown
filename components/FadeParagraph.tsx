@@ -70,7 +70,7 @@ const FadeParagraph: FunctionComponent<Props> = ({message, onHidden , last = fal
 
             variants={variants}
 
-            className='absolute top-0 text-[#ffffff8e]'
+            className='absolute top-0 text-[#ffffff8e] text-sm'
             ref={ref}
             >
                 {message}
