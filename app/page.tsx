@@ -3,15 +3,32 @@ import Image from "next/image"
 import Link from "next/link"
 import AudioControls from "../components/AudioControls"
 import AnimationContainer from "../components/AnimationContainer"
+import Faithful from "@/components/AnimationContainer2"
 import { useCallback, useState } from "react"
 import Zap from "@/components/Zap"
+
 
 export default function Home() {
 
   const [enter, setEnter] = useState<boolean>(false)
+  const [next, setNext] = useState(0)
 
   const handleEnter = useCallback((value: boolean) =>{
     setEnter(value)
+  }, [])
+  const handleNext = useCallback(() =>{
+
+    if(next !== 1 ){
+      setNext((value : number) => value + 1)
+    }
+  }, [])
+  const handlePrev = useCallback(() =>{
+    console.log('prev')
+    if(next > 1) return 
+    if(next === 0 ) setEnter(false)
+    setNext((value : number) => value  - 1)
+    setEnter(false)
+
   }, [])
   return (
     <div className="h-screen w-full relative">
@@ -37,12 +54,21 @@ export default function Home() {
         </Link>
       </div>
 
-
-      <AnimationContainer enter={enter} setEnter={handleEnter}/>
+      {
+        next === 0 && <AnimationContainer enter={enter} setEnter={handleEnter}/>
+      }
 
       {
-        enter && <Zap setEnter={handleEnter}/>
+        next === 1 &&  <Faithful/>    
       }
+
+      {
+        enter && <Zap setEnter={handleEnter} setNext={handleNext} setPrev={handlePrev}/>
+      }
+
+
+
+      
 
       <AudioControls/>
  

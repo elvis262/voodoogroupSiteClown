@@ -3,7 +3,7 @@ import Image from "next/image"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { cn } from "@/lib/cn"
 import ParagraphShower from "./ParagraphShower"
-import { type } from "os"
+import { motion as m, AnimatePresence} from "framer-motion"
 
 
 
@@ -42,7 +42,20 @@ function AnimationContainer({enter, setEnter}: Props) {
     },[ref])
     console.log(conditionnalClass)
   return (
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] h-2/5 md:w-[35%] md:h-4/5 md:top-2 md:translate-y-0 text-center" ref={ref}>
+    <AnimatePresence>
+        <m.div 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit= {{
+            opacity: 0,
+            transition: {
+                duration: 2.5,
+                ease: 'easeInOut'        
+            }
+        }}
+        className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[90%] h-2/5 md:w-[35%] md:h-4/5 md:top-2 md:translate-y-0 text-center" 
+        ref={ref} 
+        onResize={handleResize}>
         <Image 
         src={"/asset/Poupe-Vaticom.png"}
         width = {840}
@@ -66,7 +79,8 @@ function AnimationContainer({enter, setEnter}: Props) {
         }
 
         
-    </div>
+    </m.div>
+    </AnimatePresence>
   )
 }
 

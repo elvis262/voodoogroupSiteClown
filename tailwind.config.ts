@@ -17,6 +17,9 @@ const config: Config = {
       fontFamily: {
         'patriot': ['	Patriot Light', 'sans-serif']
       },
+      gridTemplateColumns: {
+        'masonary' : 'repeat(auto-fill, minmax(25px, 80px))'
+      }
     },
   },
   plugins: [],

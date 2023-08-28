@@ -13,12 +13,19 @@ export default function AudioControls() {
 
   const [play, setPlay] = useState<boolean>(false)
 
+  useEffect(() => {
+    if(sound){
+      sound.play()
+      console.log(sound.play())
+    }
+  }, [])
+  
 
   useEffect(()=>{
       if(play){
         sound.play()
       }else{
-        console.log(sound.stop())
+        sound.stop()
       }
   }, [play])
 
